@@ -32,5 +32,14 @@ jobs:
               with:
                 name: semgrep-report
                 path: semgrep-report.txt
+            
+            - name: Run Audit with SCA for Node
+              run: npm audit --json > npm-audit-report.txt || truet
+            
+            - name : Upload Audit report
+              uses: actions/upload-artifact@v3
+              with:
+                name: Node SCA Analysis
+                path: npm-audit-report.txt
 
 
