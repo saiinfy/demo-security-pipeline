@@ -22,6 +22,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+app.get('/vulnerable-eval', (req, res) => {
+  const userInput = req.query.input;
+  // Vulnerable: Using eval with user input can lead to arbitrary code execution
+  eval(userInput);
+  res.send('Executed your input');
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
