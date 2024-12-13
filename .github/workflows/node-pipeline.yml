@@ -25,6 +25,12 @@ jobs:
               run: pip install semgrep
             
             - name: Run SAST using Semgrep
-              run: semgrep --config p/ci 
+              run: semgrep --config p/ci > semgrep-report.txt
+
+            - name : Upload Semgrep report
+              uses: actions/upload-artifact@v3
+              with:
+                name: semgrep-report
+                path: semgrep-report.txt
 
 
